@@ -1,5 +1,5 @@
 import './App.css';
-import SyllabusHandle from './components/syllabus_handle';
+import SyllabusHandle from './components/syllabusHandle';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
