@@ -4,7 +4,7 @@ import { Card, Badge, Button } from 'react-bootstrap';
 const SyllabusCards = (props) => {
   const {index, syllabusItem, editForm, deleteData } = props; 
   return (
-    <Card key = {index} className="my-2" style={{ width: '25rem' }}>
+    <Card key = {index} className="my-2" style={{ width: '30rem' }}>
       <Card.Header as="h5" style={{ textAlign: 'left' }}>
         <Badge bg="info">{index + 1}</Badge> {syllabusItem.title}
       </Card.Header>
