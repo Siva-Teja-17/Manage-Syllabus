@@ -8,15 +8,29 @@ const SyllabusHandle = () => {
 
   const openForm = () => {
     const cloneSyllabusData = [...syllabusData];
-    cloneSyllabusData.push({ title: "", description: "", objectives: "", editMode: true });
+    cloneSyllabusData.push({ title: "", description: "", objectives: "", editMode: true , cancelMode: false});
     setSyllabusData(cloneSyllabusData);
   }
 
-  const editForm = () => {
-    
+  const editForm = (index) =>
+  {
+    const cloneSyllabusData = [...syllabusData];
+    cloneSyllabusData.map((item, position) => {
+      if (index === position) {
+        item.editMode = true;
+        setSyllabusData(cloneSyllabusData);
+      }
+    });
   }
 
   const closeForm = () => {
+    const modifiedSyllabusCards = [...syllabusData];
+    modifiedSyllabusCards.map((item, index) => {
+      if (item.cancelMode == false) {
+        syllabusData.splice(index, 1);
+        setSyllabusData(modifiedSyllabusCards);
+      }
+    });
     const cloneSyllabusData = syllabusData.map((item) => ({...item, editMode: false}));
     setSyllabusData(cloneSyllabusData);
   }
@@ -38,10 +52,9 @@ const SyllabusHandle = () => {
       Add Syllabus{" "}
       <Button variant='primary' onClick={openForm}> + </Button>
       {syllabusData.map((syllabusItem, index) => {
-        console.log("syllabusItem",syllabusItem);
         return (syllabusItem.editMode ?
           (<SyllabusForm key={index} index={index} syllabusItem={syllabusItem} closeForm={closeForm} saveData={saveData} />) :
-          (<SyllabusCards key={index} index={index} syllabusItem={syllabusItem} openForm={openForm} deleteData={deleteData} />)
+          (<SyllabusCards key={index} index={index} syllabusItem={syllabusItem} editForm={() => editForm(index)} deleteData={() => deleteData(index)} />)
         )
       })}
     </div>
